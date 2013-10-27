@@ -22,6 +22,7 @@ public class Game extends BasicGame{
 		screen = new Screen();
 		player = new Player(0, 0);
 		level = new Level("res/level.tmx");
+		level.add(player);
 	}
 
 	public void update(GameContainer gameContainer, int delta) throws SlickException {
