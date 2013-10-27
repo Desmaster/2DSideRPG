@@ -12,6 +12,7 @@ public class Player extends Mob{
 	}
 
 	public void render(Screen screen) {
+		
 	}
 
 }
