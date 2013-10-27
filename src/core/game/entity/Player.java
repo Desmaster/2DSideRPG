@@ -3,7 +3,7 @@ package core.game.entity;
 import core.game.graphics.Screen;
 import org.lwjgl.input.Keyboard;
 
-public class Player extends Mob{
+public class Player extends Mob {
 
 	public Player(float x, float y) {
 		super(x, y);
@@ -15,15 +15,13 @@ public class Player extends Mob{
 		super.update(delta);
 
 		if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
-			velocity.x -= delta / 3;
+			velocity.x -= delta / 8;
 		} else if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
-			velocity.x += delta / 3;
+			velocity.x += delta / 8;
 		}
 
 		if (! onAir && jt <= 0 && Keyboard.isKeyDown(Keyboard.KEY_W)) {
-			velocity.y -= jumpSpeed;
-			jt = jumpDelay;
-			onAir = true;
+			jump();
 		}
 
 		move();

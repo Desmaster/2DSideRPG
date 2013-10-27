@@ -6,7 +6,7 @@ import org.newdawn.slick.geom.Vector2f;
 public class Mob extends Entity {
 
 	protected Vector2f velocity = new Vector2f();
-	private float friction = 0.55f;
+	private float friction = 0.80f;
 	private float gravity = 4.5f;
 
 	protected float jumpSpeed = 40f;
@@ -22,11 +22,13 @@ public class Mob extends Entity {
 	}
 
 	public void update(int delta) {
-		if (jt > 0 && !onAir) jt -= delta;
+		if (jt > 0 && ! onAir) jt -= delta;
 	}
 
 	protected void move() {
 		velocity.x *= friction;
+
+		if (friction >= Math.abs(velocity.x)) velocity.x = 0;
 
 		if (onAir) {
 			velocity.y += gravity;
@@ -43,6 +45,12 @@ public class Mob extends Entity {
 
 		x = newX;
 		y = newY;
+	}
+
+	protected void jump() {
+		velocity.y -= jumpSpeed;
+		jt = jumpDelay;
+		onAir = true;
 	}
 
 	public void render(Screen screen) {
