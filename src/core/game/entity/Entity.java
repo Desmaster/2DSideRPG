@@ -1,11 +1,14 @@
 package core.game.entity;
 
+import org.newdawn.slick.tiled.TiledMap;
+
 import core.game.graphics.Screen;
 
 public class Entity {
 
 	protected float x, y;
 	protected int width, height;
+	protected TiledMap world;
 
 	public Entity(float x, float y) {
 		this.x = x;
@@ -48,5 +51,13 @@ public class Entity {
 
 	public void setHeight(int height) {
 		this.height = height;
+	}
+	
+	public TiledMap getWorld(){
+		return world;
+	}
+	
+	public void setWorld(TiledMap world){
+		this.world = world;
 	}
 }

@@ -1,6 +1,8 @@
-package core.game.entity;
+package core.game.entity.player;
 
+import core.game.entity.Mob;
 import core.game.graphics.Screen;
+
 import org.lwjgl.input.Keyboard;
 
 public class Player extends Mob{

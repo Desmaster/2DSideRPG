@@ -2,7 +2,8 @@ package core.game.graphics;
 
 import core.game.entity.Entity;
 import core.game.entity.Mob;
-import core.game.entity.Player;
+import core.game.entity.player.Player;
+
 import org.newdawn.slick.Graphics;
 
 public class Screen {

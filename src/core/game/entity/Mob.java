@@ -16,7 +16,7 @@ public class Mob extends Entity {
 	protected boolean wasOnAir = false;
 
 	protected int jt = 0;
-
+	
 	public Mob(float x, float y) {
 		super(x, y);
 	}
