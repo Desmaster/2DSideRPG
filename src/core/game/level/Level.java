@@ -6,20 +6,29 @@ import core.game.graphics.Screen;
 import java.util.ArrayList;
 import java.util.List;
 
+import core.game.level.mapping.CollisionMap;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
 public class Level {
 
 	private List<Entity> entities = new ArrayList<Entity>();
-	private TiledMap world;
+	private TiledMap map;
+	private CollisionMap collisionMap;
 	
-	public Level() throws SlickException {
+	public Level(String path) throws SlickException {
+		map = new TiledMap(path);
+		collisionMap = new CollisionMap(map, getPixelWidth(), getPixelHeight(), map.getTileHeight());
 	}
-	
+
+	/**
+	 * Used for switching to a map.
+	 * @param path Path to the map
+	 * @throws SlickException
+	 */
 	public void loadWorld(String path) throws SlickException{
 		entities.clear();
-		world = new TiledMap(path);
+		map = new TiledMap(path);
 	}
 	
 	public void update(int delta) {
@@ -29,15 +38,23 @@ public class Level {
 	}
 
 	public void render(Screen screen) {
-		world.render(0, 0);
+		map.render(0, 0);
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(screen);
 		}
 	}
 
 	public void add(Entity entity) {
-		entity.setWorld(world);
+		entity.setLevel(this);
 		entities.add(entity);
+	}
+
+	public int getPixelWidth() {
+		return map.getWidth() * map.getTileWidth();
+	}
+
+	public int getPixelHeight() {
+		return  map.getHeight() * map.getTileHeight();
 	}
 
 }

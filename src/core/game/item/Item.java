@@ -1,12 +1,12 @@
-package core.game.data.item;
+package core.game.item;
 
 public class Item {
 	private int itemID;
-	private itemType itemType;
+	private itemType type;
 	
-	public Item(int itemID, itemType itemType){
+	public Item(int itemID, itemType type){
 		this.itemID = itemID;
-		this.itemType = itemType;
+		this.type = type;
 	}
 	
 	public enum itemType{
@@ -20,7 +20,7 @@ public class Item {
 	 * Is called when player double clicks on item in inventory UI
 	 */
 	public void onUse(){
-		switch(this.itemType){
+		switch(this.type){
 		case CONSUMABLE:
 			/*
 			 * Add health to player or possibly weird status effect?
@@ -42,7 +42,7 @@ public class Item {
 			 */
 			break;
 		default:
-			//undefined itemType;
+			//undefined type;
 		}
 	}
 }

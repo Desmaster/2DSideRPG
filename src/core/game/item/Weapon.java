@@ -1,6 +1,4 @@
-package core.game.entity.player;
-
-import core.game.data.item.Item;
+package core.game.item;
 
 public class Weapon extends Item {
 	public Weapon(int itemID){

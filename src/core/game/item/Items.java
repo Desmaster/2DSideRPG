@@ -1,6 +1,4 @@
-package core.game.data.item;
-
-import core.game.entity.player.Weapon;
+package core.game.item;
 
 public class Items {
 	

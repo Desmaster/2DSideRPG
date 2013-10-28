@@ -1,4 +1,4 @@
-package core.game.entity.player;
+package core.game.entity;
 
 import core.game.entity.Mob;
 import core.game.graphics.Screen;
