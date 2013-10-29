@@ -17,7 +17,6 @@ public class UIRenderer {
 	}
 
 	public void activate(UserInterface ui) {
-		System.out.println("UI ACTIVATED: " + ui.name);
 		activeUIList.add(ui);
 		updateTimer = 0;
 	}
@@ -36,8 +35,7 @@ public class UIRenderer {
 	public void render(Graphics graphics) {
 		for (int i = 0; i < activeUIList.size(); i++) {
 			UserInterface UI = UIList.get(i);
-			graphics.drawImage(UI.sprite, UI.x, UI.y, UI.width, UI.height,
-					UI.x, UI.y, UI.width, UI.height, Color.white);
+			graphics.drawImage(UI.sprite, UI.x, UI.y, 0, 0, UI.width, UI.height);
 		}
 	}
 
@@ -54,7 +52,6 @@ public class UIRenderer {
 
 	public void update(int delta) {
 		updateTimer += delta;
-		System.out.println(updateTimer);
 		for (int i = 0; i < UIList.size(); i++) {
 			UserInterface UI = UIList.get(i);
 			UI.ActivateOnKey(updateTimer, UI.key);
