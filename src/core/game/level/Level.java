@@ -2,35 +2,39 @@ package core.game.level;
 
 import core.game.entity.Entity;
 import core.game.graphics.Screen;
-
-import java.util.ArrayList;
-import java.util.List;
-
 import core.game.level.mapping.CollisionMap;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Level {
+
+	public int tileSize;
 
 	private List<Entity> entities = new ArrayList<Entity>();
 	private TiledMap map;
 	private CollisionMap collisionMap;
-	
+
 	public Level(String path) throws SlickException {
 		map = new TiledMap(path);
-		collisionMap = new CollisionMap(map, getPixelWidth(), getPixelHeight(), map.getTileHeight());
+		tileSize = map.getTileWidth() & map.getTileHeight();
+		if (tileSize == 0) throw new SlickException("TileWidth and TileHeight are not equal.");
+		collisionMap = new CollisionMap(map, tileSize);
 	}
 
 	/**
 	 * Used for switching to a map.
+	 *
 	 * @param path Path to the map
 	 * @throws SlickException
 	 */
-	public void loadWorld(String path) throws SlickException{
+	public void loadWorld(String path) throws SlickException {
 		entities.clear();
 		map = new TiledMap(path);
 	}
-	
+
 	public void update(int delta) {
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).update(delta);
@@ -38,7 +42,7 @@ public class Level {
 	}
 
 	public void render(Screen screen) {
-		map.render(0, 0);
+		screen.render(map, tileSize);
 		for (int i = 0; i < entities.size(); i++) {
 			entities.get(i).render(screen);
 		}
@@ -54,10 +58,10 @@ public class Level {
 	}
 
 	public int getPixelHeight() {
-		return  map.getHeight() * map.getTileHeight();
+		return map.getHeight() * map.getTileHeight();
 	}
-	
-	public boolean isSolid(int x, int y){
+
+	public boolean isSolid(int x, int y) {
 		return collisionMap.getCollision(x, y);
 	}
 

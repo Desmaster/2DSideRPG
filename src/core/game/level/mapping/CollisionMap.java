@@ -1,24 +1,28 @@
 package core.game.level.mapping;
 
 import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.util.Log;
 
 public class CollisionMap {
 
 	private boolean[] solid;
-	private int width;
+	private int width, height;
 	
-	public CollisionMap(TiledMap map, int width, int height, int tileSize) {
-		this.width = width;
+	public CollisionMap(TiledMap map, int tileSize) {
 		int layer = map.getObjectLayerIndex("Collision");
+
+		width = map.getWidth();
+		height = map.getHeight();
+		Log.info("Width: " + width + ", height: " + height);
 
 		solid = new boolean[width * height];
 
 		for (int i = 0; i < map.getObjectCount(layer); i++) {
-			int x = map.getObjectX(layer, i) + map.getObjectWidth(layer, i);
-			int y = map.getObjectY(layer, i) + map.getObjectHeight(layer, i);
+			int x = (map.getObjectX(layer, i) + map.getObjectWidth(layer, i)) / tileSize;
+			int y = (map.getObjectY(layer, i) + map.getObjectHeight(layer, i)) / tileSize;
 
-			for (int xa = map.getObjectX(layer, i); xa < x; xa++) {
-				for (int ya = map.getObjectY(layer, i); ya < y; ya++) {
+			for (int xa = map.getObjectX(layer, i) / tileSize; xa < x; xa++) {
+				for (int ya = map.getObjectY(layer, i) / tileSize; ya < y; ya++) {
 					solid[xa + ya * width] = true;
 				}
 			}
@@ -27,7 +31,7 @@ public class CollisionMap {
 	}
 	
 	public boolean getCollision(int x, int y){
-		return solid[x + y * width];
+		return x >= width || y >= height || solid[x + y * width];
 	}
 
 }
