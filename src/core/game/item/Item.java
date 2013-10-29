@@ -8,8 +8,8 @@ import java.util.List;
 public class Item {
 
 	private static List<Item> itemList = new ArrayList<Item>();
-	private String name;
-	private Image sprite;
+	public String name;
+	public Image sprite;
 
 	public final static Item hammer = new Weapon("Hammer", null);
 
