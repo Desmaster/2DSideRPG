@@ -3,12 +3,15 @@
  <tileset firstgid="1" name="terrain" tilewidth="32" tileheight="32">
   <image source="gfx/terrain.png" trans="ff00ff" width="64" height="32"/>
  </tileset>
- <objectgroup name="Entities" width="40" height="23">
-  <object name="Player" x="463" y="655" width="30" height="46"/>
- </objectgroup>
  <layer name="Tiles" width="40" height="23">
   <data encoding="base64" compression="gzip">
    H4sIAAAAAAAAC+3MsQkAAAjAMPX/o73ASRchga6NAAAA4IM8qoa23wYIylW2YA4AAA==
   </data>
  </layer>
+ <objectgroup name="Entities" width="40" height="23">
+  <object name="Player" x="324" y="654" width="30" height="46"/>
+ </objectgroup>
+ <objectgroup name="Collision" width="40" height="23">
+  <object type="Collision" x="0" y="704" width="1280" height="32"/>
+ </objectgroup>
 </map>

@@ -25,7 +25,6 @@ public class Player extends Mob {
 		if (! onAir && jt <= 0 && Keyboard.isKeyDown(Keyboard.KEY_W)) {
 			jump();
 		}
-
 		move();
 	}
 

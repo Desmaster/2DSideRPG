@@ -56,5 +56,9 @@ public class Level {
 	public int getPixelHeight() {
 		return  map.getHeight() * map.getTileHeight();
 	}
+	
+	public boolean isSolid(int x, int y){
+		return collisionMap.getCollision(x, y);
+	}
 
 }
