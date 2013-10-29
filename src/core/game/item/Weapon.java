@@ -1,7 +1,9 @@
 package core.game.item;
 
+import org.newdawn.slick.Image;
+
 public class Weapon extends Item {
-	public Weapon(int itemID){
-		super(itemID, itemType.WEAPON);
+	public Weapon(String name, Image sprite){
+		super(name, sprite);
 	}
 }
