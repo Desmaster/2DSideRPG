@@ -5,6 +5,7 @@ import core.game.graphics.Screen;
 import core.game.level.mapping.CollisionMap;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.tiled.TiledMap;
+import org.newdawn.slick.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,6 +23,7 @@ public class Level {
 		tileSize = map.getTileWidth() & map.getTileHeight();
 		if (tileSize == 0) throw new SlickException("TileWidth and TileHeight are not equal.");
 		collisionMap = new CollisionMap(map, tileSize);
+		Log.info("Tilesize: " + tileSize);
 	}
 
 	/**

@@ -2,7 +2,6 @@ package core.game.entity;
 
 import core.game.graphics.Screen;
 import org.newdawn.slick.geom.Vector2f;
-import org.newdawn.slick.util.Log;
 
 public class Mob extends Entity {
 
@@ -23,7 +22,7 @@ public class Mob extends Entity {
 	}
 
 	public void update(int delta) {
-		if (jt > 0 && ! onAir) jt -= delta;
+		if (jt > 0 && !onAir) jt -= delta;
 	}
 
 	protected void move() {
@@ -37,65 +36,33 @@ public class Mob extends Entity {
 			velocity.y = 0;
 		}
 
-		float newX = velocity.x + x;
-		float newY = velocity.y + y;
+		move2(velocity.x, velocity.y);
+	}
+
+	private void move2(float xa, float ya) {
+		if (xa != 0 && ya != 0) {
+			move2(xa, 0);
+			move2(0, ya);
+			return;
+		}
 
 		wasOnAir = onAir;
 
-		onAir = ! coll(newX, newY);
+		onAir = !collision(xa, ya);
 
-		if (coll(newX, newY)) Log.info("Collision");
-
-		if (!coll(newX, newY)) {
-			x = newX;
-			y = newY;
+		if (!collision(xa, ya)) {
+			x += xa;
+			y += ya;
 		}
 	}
 
-	private boolean coll(float x, float y) {
+	private boolean collision(float xa, float ya) {
 		boolean solid = false;
-		int x1 = (int) (x / level.tileSize);
-		int y1 = (int) (y / level.tileSize);
-		int x2 = (int) (x + (width * 0.25)) / level.tileSize;
-		int y2 = (int) (y + (height * 0.25)) / level.tileSize;
-		int x3 = (int) (x + (width * 0.75)) / level.tileSize;
-		int y3 = (int) (y + (height * 0.75)) / level.tileSize;
-		int x4 = (int) (x + width) / level.tileSize;
-		int y4 = (int) (y + height) / level.tileSize;
-		if (level.isSolid(x1, y1)) solid = true;
-		if (level.isSolid(x2, y1)) solid = true;
-		if (level.isSolid(x3, y1)) solid = true;
-		if (level.isSolid(x4, y1)) solid = true;
-
-		if (level.isSolid(x4, y2)) solid = true;
-		if (level.isSolid(x4, y3)) solid = true;
-		if (level.isSolid(x4, y4)) solid = true;
-
-		if (level.isSolid(x3, y4)) solid = true;
-		if (level.isSolid(x2, y4)) solid = true;
-		if (level.isSolid(x1, y4)) solid = true;
-
-		if (level.isSolid(x1, y3)) solid = true;
-		if (level.isSolid(x1, y2)) solid = true;
-		if (level.isSolid(x1, y1)) solid = true;
-
-		return solid;
-	}
-
-	private boolean collision(float x, float y) {
-		boolean solid = false;
-		int x1 = (int) (x / level.tileSize);
-		int y1 = (int) (y / level.tileSize);
-		int x2 = (int) (x + width) / level.tileSize;
-		int y2 = (int) (y + height) / level.tileSize;
-		int x3 = (int) (x + (width / 2)) / level.tileSize;
-		int y3 = (int) (y + (height / 2)) / level.tileSize;
-		int x4;
-		int y4;
-		if (level.isSolid(x1, y1)) solid = true;
-		if (level.isSolid(x2, y1)) solid = true;
-		if (level.isSolid(x2, y2)) solid = true;
-		if (level.isSolid(x1, y2)) solid = true;
+		for (int c = 0; c < 4; c++) {
+			int xt = (int) ((x + xa) + c % 2 * 45 - 25) / level.tileSize;
+			int yt = (int) ((y + ya) + c / 2 * 20 + 10) / level.tileSize;
+			if (level.isSolid(xt, yt)) solid = true;
+		}
 		return solid;
 	}
 

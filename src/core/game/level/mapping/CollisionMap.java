@@ -13,7 +13,6 @@ public class CollisionMap {
 
 		width = map.getWidth();
 		height = map.getHeight();
-		Log.info("Width: " + width + ", height: " + height);
 
 		solid = new boolean[width * height];
 
@@ -31,7 +30,7 @@ public class CollisionMap {
 	}
 	
 	public boolean getCollision(int x, int y){
-		return x >= width || y >= height || solid[x + y * width];
+		return x < 0 || y < 0 || x >= width || y >= height || solid[x + y * width];
 	}
 
 }
