@@ -22,7 +22,7 @@ public class Game extends BasicGame {
 	public void init(GameContainer gameContainer) throws SlickException {
 		screen = new Screen(gameContainer.getGraphics());
 		player = new Player(0, 0);
-		level = new Level("/res/level.tmx");
+		level = new Level("/res/naamloos1.tmx");
 		level.add(player);
 	}
 
